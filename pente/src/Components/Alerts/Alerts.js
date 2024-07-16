@@ -1,12 +1,3 @@
-import React from 'react'
-
-const Alerts = () => {
-  return (
-    <div>Alerts</div>
-  )
-}
-
-export default Alerts
 import React from 'react';
 
 function Alerts({ alerts, capturedPieces }) {
