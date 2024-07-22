@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Pente/static/css/main.61267b66.css",
+    "main.js": "/Pente/static/js/main.306c6c32.js",
+    "static/js/453.d7425eed.chunk.js": "/Pente/static/js/453.d7425eed.chunk.js",
+    "index.html": "/Pente/index.html",
+    "main.61267b66.css.map": "/Pente/static/css/main.61267b66.css.map",
+    "main.306c6c32.js.map": "/Pente/static/js/main.306c6c32.js.map",
+    "453.d7425eed.chunk.js.map": "/Pente/static/js/453.d7425eed.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.61267b66.css",
+    "static/js/main.306c6c32.js"
+  ]
+}
