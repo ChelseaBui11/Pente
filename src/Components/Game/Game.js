@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import Board from '../Board/Board.js';
 import PlayerInput from '../PlayerInput/PlayerInput.js';
@@ -41,6 +43,7 @@ function Game() {
             newAlerts.push(`Player ${xIsNext ? players.playerX : players.playerO} wins!`);
         } else {
             checkCaptures(newBoard, i, newAlerts);
+            checkPatterns(newBoard, i, newAlerts);
         }
         setAlerts(newAlerts);
     };
@@ -71,6 +74,35 @@ function Game() {
             }
         }
         return false;
+    };
+
+    const checkPatterns = (board, index, alerts) => {
+        const player = board[index];
+        const directions = [
+            [1, 0], [0, 1], [1, 1], [1, -1]
+        ];
+
+        const countInDirection = (xStep, yStep) => {
+            let count = 0;
+            let x = index % boardSize;
+            let y = Math.floor(index / boardSize);
+
+            while (x >= 0 && x < boardSize && y >= 0 && y < boardSize && board[y * boardSize + x] === player) {
+                count++;
+                x += xStep;
+                y += yStep;
+            }
+            return count;
+        };
+
+        for (let [xStep, yStep] of directions) {
+            const totalCount = countInDirection(xStep, yStep) + countInDirection(-xStep, -yStep) - 1;
+            if (totalCount === 3) {
+                alerts.push(`Player ${player} has a Tria!`);
+            } else if (totalCount === 4) {
+                alerts.push(`Player ${player} has a Tessera!`);
+            }
+        }
     };
 
     const checkCaptures = (board, index, alerts) => {
@@ -115,11 +147,23 @@ function Game() {
             setAlerts([...alerts, `Player ${xIsNext ? players.playerX : players.playerO} forfeited their turn!`]);
         }
     };
+
+    const startNewGame = () => {
+        setBoard(Array(boardSize * boardSize).fill(null));
+        setXIsNext(true);
+        setCapturedPieces({ X: 0, O: 0 });
+        setAlerts([]);
+        setTurnTimer(30);
+        setWinner(null);
+    };
+
     return (
         <div className="game">
             <PlayerInput onSetNames={handlePlayerNames} />
             <Board squares={board} onClick={handleClick} />
             <Alerts alerts={alerts} capturedPieces={capturedPieces} />
+            <div className="turn-timer">Time left: {turnTimer}s</div>
+            <button onClick={startNewGame}>New Game</button>
         </div>
     );
 }
