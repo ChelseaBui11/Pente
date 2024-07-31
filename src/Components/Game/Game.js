@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import Board from '../Board/Board.js';
 import PlayerInput from '../PlayerInput/PlayerInput.js';
@@ -40,7 +38,7 @@ function Game() {
         const newAlerts = [...alerts];
         if (checkWinCondition(newBoard, i)) {
             setWinner(xIsNext ? players.playerX : players.playerO);
-            newAlerts.push(`Player ${xIsNext ? players.playerX : players.playerO} wins!`);
+            newAlerts.push(`${xIsNext ? players.playerX : players.playerO} wins!`);
         } else {
             checkCaptures(newBoard, i, newAlerts);
             checkPatterns(newBoard, i, newAlerts);
@@ -98,9 +96,9 @@ function Game() {
         for (let [xStep, yStep] of directions) {
             const totalCount = countInDirection(xStep, yStep) + countInDirection(-xStep, -yStep) - 1;
             if (totalCount === 3) {
-                alerts.push(`Player ${player} has a Tria!`);
+                alerts.push(`${player} has a Tria!`);
             } else if (totalCount === 4) {
-                alerts.push(`Player ${player} has a Tessera!`);
+                alerts.push(`${player} has a Tessera!`);
             }
         }
     };
@@ -144,7 +142,7 @@ function Game() {
         if (!winner) {
             setXIsNext(!xIsNext);
             setTurnTimer(30);
-            setAlerts([...alerts, `Player ${xIsNext ? players.playerX : players.playerO} forfeited their turn!`]);
+            setAlerts([...alerts, `${xIsNext ? players.playerX : players.playerO} forfeited their turn!`]);
         }
     };
 
