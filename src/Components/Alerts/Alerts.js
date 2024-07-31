@@ -1,12 +1,11 @@
 import React from 'react';
 
-function Alerts({ alerts, capturedPieces }) {
+function Alerts({ alerts }) {
     return (
         <div className="alerts">
             {alerts.map((alert, index) => (
                 <div key={index}>{alert}</div>
             ))}
-            <div>Captured Pieces - X: {capturedPieces.X}, O: {capturedPieces.O}</div>
         </div>
     );
 }
